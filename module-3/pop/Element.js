@@ -15,3 +15,6 @@
  *       the given name or throws an Erorr if it cannot
  *       find the element
  */
+class Element {
+    
+}

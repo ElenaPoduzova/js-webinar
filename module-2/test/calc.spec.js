@@ -17,5 +17,21 @@ describe.only('calc', () => {
      *     .times(6).v // 24
      */
     // TODO: write test cases to test calculator
+    describe.only('calc correct values', () => {
+        calcFunctions.calcData().forEach(element => {
+            it(`calculation ${element.func} should return ${element.result}`, () => {
+                expect(eval(element.func)).to.equal(element.result);
+            })
+        });
+    });
 
+    describe.only('check exceptions', () => {
+        it('can\'t divide by 0', () => {
+            expect(() => calc(5).divide(0)).to.throw();
+        });
+
+        it('can\'t get sqrt from negative value', () => {
+            expect(() => calc(-3).sqrt()).to.throw();
+        });
+    });
 });
