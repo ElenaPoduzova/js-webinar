@@ -55,7 +55,7 @@ describe('Element Class', () => {
 
             expect(element.children).not.to.be.undefined;
             expect(element.children).to.eql({});
-        });
+        }); 
 
         it('should have method to add children', () => {
             const element = new Element('Body', {css: 'body'});

@@ -15,6 +15,40 @@
  *       the given name or throws an Erorr if it cannot
  *       find the element
  */
+'use strict';
+
 class Element {
-    
+    constructor(name, locator) {
+        this.name = name;
+        this.locator = locator;
+        this.parent = null;
+        this.children = {};
+    }
+
+    setParent(parent) {
+        this.parent = parent;
+    }
+
+    addChildren(child) {
+        if (this.children[child.name]) {
+            throw new Error(`Child ${child.name} is already attached`);
+        }
+
+        this.children[child.name] = child;
+        this.setParent(this);
+    }
+
+    get(name) {
+        if (!name) {
+            return element(this.locator)
+        }
+
+        if (this.children[name]) {
+            return this.children[name].get();
+        }
+
+        throw new Error(`Child ${name} wasn't found`);
+    }
 }
+
+module.exports = Element;

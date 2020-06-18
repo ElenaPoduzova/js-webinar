@@ -13,3 +13,39 @@
  * 6. It has a method to retrieve one element from the collection
  *    by the locator (.get(n)) in it's context
  */
+const ElementFinder = require('../test/mock/ElementFinder');
+const ElementArrayFinder = require('../test/mock/ElementArrayFinder');
+
+'use strict';
+
+class Elements {
+    constructor(name, locator) {
+        this.name = name;
+        this.locator = locator;
+        this.parent = null;
+        this.children = null;
+    }
+
+    setParent(parent) {
+        this.parent = parent;
+    }
+
+    addChildren(child) {
+        if (this.children[child.name]) {
+            throw new Error(`Child ${child.name} is already attached`);
+        }
+
+        this.children[child.name] = child;
+        this.setParent(this);
+    }
+
+    get(count) {
+        return new ElementArrayFinder().get(count)
+    }
+
+    all() {
+        return new ElementArrayFinder().all(this.locator)
+    }
+}
+
+module.exports = Elements;

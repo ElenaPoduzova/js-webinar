@@ -14,3 +14,49 @@
  * 7. It has a method to load the page, i.e. Navigates to
  *    the URL of it (.load())
  */
+'use strict';
+
+class Layout {
+    constructor(name, url, locator) {
+        this.name = name;
+        this.url = url;
+        this.locator = locator;
+        this.parent = null;
+        this.children = {};
+    }
+
+    setParent(parent) {
+        if (this.parent === null) {
+            this.parent = parent;
+        } else {
+            throw new Error(`Element ${this.name} already has a parent!`);
+        }
+    }
+
+    addChildren(child) {
+        if (this.children[child.name]) {
+            throw new Error(`Child ${child.name} is already attached`);
+        }
+
+        this.children[child.name] = child;
+        this.setParent(this);
+    }
+
+    get(name) {
+        if (!name) {
+            return element(this.locator)
+        }
+
+        if (this.children[name]) {
+            return this.children[name].get();
+        }
+
+        throw new Error(`Child ${name} wasn't found`);
+    }
+
+    load() {
+        return this.url;
+    }
+}
+
+module.exports = Layout;

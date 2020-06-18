@@ -1,6 +1,7 @@
 const ElementFinder = require('../mock/ElementFinder');
 const Browser = require('../mock/Browser');
 const Layout = require('../../pop/Layout');
+const Element = require('../../pop/Element');
 const expect = require('chai').expect;
 
 describe('Layout Class', () => {
@@ -52,6 +53,9 @@ describe('Layout Class', () => {
             const page = new Layout('Home', 'http://epam.com', {css: 'body'});
 
             expect(page.setParent).not.to.be.undefined;
+
+            page.setParent(element);
+
             expect(() => page.setParent(element)).to.throw();
         });
     });

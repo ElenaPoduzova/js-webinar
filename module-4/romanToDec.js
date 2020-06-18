@@ -7,14 +7,3 @@
  * @returns {number} the Arabic (decimal) equivalent of the parameter
  * @throws Error in case of invalid input
  */
-
- function toCamelCase(string) {
-    var array = string.split('');
-    var concat = (acc, val) => {
-
-    }
-
-    return array.reduce(concat)
- }
-
- module.exports = toCamelCase;
